@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Примитивный калькулятор</title>
+    <style>
+      body {
+        background-color: bisque;
+        color: indianred;
+      }
+
+      section {
+        display: grid;
+        max-width: 550px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .input_section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        overflow: hidden;
+        gap: 10px;
+      }
+      
+      .operation_section {
+        grid-template-columns: repeat(4, 1fr);
+        margin-bottom: 5px;
+      }
+
+      .operand {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 5px;
+      }
+
+      button {
+        border-radius: 5px;
+        border: none;
+        padding:8px 15px;
+        background-color: coral;
+        margin: 10px 1px;
+        color: Maroon;
+        font-size: 14px;
+      }
+
+      button:hover {
+        background-color: #f6980c;
+        box-shadow: 0 16px 36px rgba(246 152 12 / 20%);
+      }
+
+      label {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+
+      .result_section {
+        max-width: 40%;
+      }
+
+      .result_section input {
+        font-size: 18px;
+        outline: none;
+      }
+
+      input {
+        font-size: 14px;
+        color: #213053;
+        height: 45px;
+        padding: 0px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: Ivory;
+        text-align: center;
+      }      
+    </style>
+
+  </head>
+  <body>
+    <main>
+      <section id="input_section" class="input_section">
+        <div id="operand" class="operand">
+          <label for="input_1">1 операнд</label>
+          <input type="number"
+            id="input_1"
+            placeholder="введите значение 1 операнда"
+          ></input>
+        </div>
+        <div id="operand" class="operand">
+          <label for="input_2">2 операнд</label>
+          <input type="number"
+            id="input_2"
+            placeholder="введите значение 2 операнда"
+          ></input>
+        </div>
+      </section>
+      <section id="operation_section" class="operation_section">
+        <button name="sumButton" onclick="buttonSum()">суммировать</button>
+        <button name="sumButton" onclick="buttonSubtract()">вычесть</button>
+        <button name="sumButton" onclick="buttonMult()">умножить</button>
+        <button name="sumButton" onclick="buttonDivision()">разделить</button>
+      </section>
+      <section id="result_section" class="result_section">
+        <input id="output" placeholder="Результат"></input>
+      </section>
+    </main>
+
+    <script>
+      function buttonSum() {
+        let result = null;
+        result =
+          parseInt(document.getElementById("input_1").value) +
+          parseInt(document.getElementById("input_2").value);
+        document.getElementById("output").value = result;
+      }
+      function buttonSubtract() {
+        let result = null;
+        result =
+          parseInt(document.getElementById("input_1").value) -
+          parseInt(document.getElementById("input_2").value);
+        document.getElementById("output").value = result;
+      }
+      function buttonMult() {
+        let result = null;
+        result =
+          parseInt(document.getElementById("input_1").value) *
+          parseInt(document.getElementById("input_2").value);
+        document.getElementById("output").value = result;
+      }
+      function buttonDivision() {
+        let result = null;
+        result =
+          parseInt(document.getElementById("input_1").value) /
+          parseInt(document.getElementById("input_2").value);
+        document.getElementById("output").value = result;
+      }
+
+      function createPlayer (name) {
+        let score = 0;
+        return function scoreCount() {
+          score++;
+          return `${name} - ${score} баллов!`;
+        }
+      }
+
+      const playerOne = createPlayer('Vitya');
+      const playerTwo = createPlayer('Ol\'ga');
+     
+
+    </script>
+  </body>
+</html>
