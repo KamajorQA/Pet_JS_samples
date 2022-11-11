@@ -1,4 +1,4 @@
 # Pet_JS_samples
-Various small js scripts
+My own various small js scripts
 Коллекция собственных небольших программ для переиспользования в дальнейшем коде.
 Примеры своих работ.
