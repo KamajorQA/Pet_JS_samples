@@ -139,18 +139,6 @@
         document.getElementById("output").value = result;
       }
 
-      function createPlayer (name) {
-        let score = 0;
-        return function scoreCount() {
-          score++;
-          return `${name} - ${score} баллов!`;
-        }
-      }
-
-      const playerOne = createPlayer('Vitya');
-      const playerTwo = createPlayer('Ol\'ga');
-     
-
     </script>
   </body>
 </html>
