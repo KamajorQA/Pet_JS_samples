@@ -1,8 +1,6 @@
 function setup() {
   createCanvas(800, 500);
-  for (let i = 0; i < count; i++) {
-    arrObstacle.push(randomInteger(30, 400)); // координата левого верхнего угла для верхнего препятствия и правого нижнего - для нижнего
-  }
+  for (let i = 0; i < count; i++) {}
 }
 
 let x = 0;
@@ -10,21 +8,25 @@ let y = 100;
 let gravity = 0.1; // скорость падения тела
 let yV = 0;
 let count = 5; // счетчик количества отрисовываемых препятствий
-let arrObstacle = []; // массив с высотой препятствий
+let arrObstacle = [randomInteger(30, 400)]; // массив с высотой препятствий (координата по оси y)
 let arrX = [0]; // массив со счетчиком созданных препятствий
 
 let height = 70; // высота отверстия между препятствиями
 
-function draw() {
-  background(153, 169, 205); // отрисовка фона с заданием ему цвета в rgb
-  drawBird(); // вызов коллбэк функции для отрисовки игрового тела
-  if (x % 100 == 0) {
-    arrX.push(x - 100 * arrX.length);
-  }
-  for (let i = 0; i < arrX.length; i++) {
-    drawRect(arrX[i], arrObstacle[i]); // вызов callback функции для отрисовки препятствий
-  }
+let gameInProgress = true;
 
+function draw() {
+  if (gameInProgress) {
+    background(153, 169, 205); // отрисовка фона с заданием ему цвета в rgb
+    drawBird(); // вызов коллбэк функции для отрисовки игрового тела
+    if (x % 100 == 0) {
+      arrX.push(x - 100 * arrX.length); // изменение координаты по x оси, а ниже - по y
+      arrObstacle.push(randomInteger(30, 400)); // координата левого верхнего угла для верхнего препятствия и правого нижнего - для нижнего
+    }
+    for (let i = 0; i < arrX.length; i++) {
+      drawRect(arrX[i], arrObstacle[i]); // вызов callback функции для отрисовки препятствий
+    }
+  }
   x++;
   for (let i = 0; i < arrX.length; i++) {
     arrX[i]++; // скорость движения препятствий
@@ -47,8 +49,8 @@ const drawBird = () => {
 };
 
 function keyPressed() {
-  //отслеживаем нажатие на пробел
-  if (keyCode === 32) {
+  //отслеживаем нажатие на пробел, arrowUp или W
+  if (keyCode === 32 || keyCode === 38 || keyCode === 87) {
     yV = -10;
   }
 }
@@ -68,4 +70,14 @@ function randomInteger(min, max) {
   // случайное число от min до (max+1)
   let rand = min + Math.random() * (max + 1 - min);
   return Math.floor(rand);
+}
+
+// функция проверки пересечения телом границы экрана
+function checkScreen() {
+  if (y >= 500) {
+    // проверка пересечения нижней границы Canvas'а
+  }
+  if (y < 0) {
+    // проверка пересечения верхней границы Canvas'а
+  }
 }
