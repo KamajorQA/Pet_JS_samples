@@ -38,9 +38,9 @@ const drawBird = () => {
   fill(236, 237, 231);
   ellipse(400, y, birdRadius * 2);
 
-  x++;
+  x += 1;
   for (let i = 0; i < arrX.length; i++) {
-    arrX[i]++; // скорость движения препятствий (увеличение значения x-координаты препятсвия)
+    arrX[i] += 2; // скорость движения препятствий (увеличение значения x-координаты препятсвия)
   }
   if (yV < 0) {
     yV += gravity * 10; // изменение скорости падения тела
@@ -95,8 +95,8 @@ function checkObstacle() {
   for (let i = 0; i < arrX.length; i++) {
     // проверка достижения каждым препятствием координаты x = 400 +- ширина препятствия
     if (
-      arrX[i] <= 400 + birdRadius &&
-      arrX[i] >= 400 - obstacleWidth - birdRadius
+      arrX[i] <= 400 + birdRadius - 2 &&
+      arrX[i] >= 400 - obstacleWidth - birdRadius + 1
     ) {
       if (
         y < arrObstacle[i] + birdRadius ||
