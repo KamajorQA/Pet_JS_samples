@@ -1,5 +1,9 @@
+const canvasWidth = 800;
+const canvasHeight = 500;
+
 function setup() {
-  createCanvas(800, 500);
+  createCanvas(canvasWidth, canvasHeight);
+  drawingContext.font = "20px Georgia";
 }
 
 let x = 0;
@@ -10,6 +14,7 @@ let birdRadius = 10; // радиус игрового тела (круга)
 let arcHeight = 80; // высота отверстия между препятствиями
 let arrObstacle = [randomInteger(30, 500 - 70 - arcHeight)]; // массив с высотой препятствий (координата по оси y)
 let arrX = [0]; // массив со счетчиком созданных препятствий и их координатой по оси x
+let score = 0; // счетчик пройденных препятствий
 
 let obstacleWidth = 10; // ширина препятствия
 
@@ -19,6 +24,7 @@ function draw() {
   if (gameInProgress) {
     checkScreen();
     checkObstacle();
+    checkScore();
     background(153, 169, 205); // отрисовка фона с заданием ему цвета в rgb
     drawBird(); // вызов коллбэк функции для отрисовки игрового тела
     if (x % 100 == 0) {
@@ -28,6 +34,11 @@ function draw() {
     for (let i = 0; i < arrX.length; i++) {
       drawRect(arrX[i], arrObstacle[i]); // вызов callback функции для отрисовки препятствий
     }
+  }
+  showScore(); // постоянный вывод счетчика рекорда
+  if (!gameInProgress) {
+    // вывод уведомления при завершении игры
+    showGameOver();
   }
 }
 
@@ -107,4 +118,29 @@ function checkObstacle() {
       }
     }
   }
+}
+
+// Функция увеличения счетчика пройденных препятствий (если очередное препятствие (его задняя стенка) достигло x-координаты 400 и игра еще не закончена
+function checkScore() {
+  for (let i = 0; i < arrX.length; i++) {
+    if (arrX[i] === 400 && gameInProgress === true) score++;
+  }
+}
+
+// Функция вывода на экран сообщения о текущем показателе рекорда (пройденных препятствий)
+function showScore() {
+  stroke(100, 100, 100);
+  strokeWeight(1);
+  fill(236, 237, 231);
+  text(`Score: ${score}`, 10, 480);
+}
+
+// Функция вывода на экран сообщения об окончании игры
+function showGameOver() {
+  stroke(234, 96, 34);
+  strokeWeight(1);
+  fill(236, 237, 231);
+  text(`Game Over!`, canvasWidth / 2 - 50, canvasHeight / 2 - 30);
+  text(`Press R to restart`, canvasWidth / 2 - 70, canvasHeight / 2);
+  text(`Your Score:  ${score}`, canvasWidth / 2 - 55, canvasHeight / 2 + 30);
 }
