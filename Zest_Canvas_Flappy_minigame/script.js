@@ -1,9 +1,12 @@
 const canvasWidth = 800;
 const canvasHeight = 500;
 
+let highScore = 0;
+
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
   drawingContext.font = "20px Georgia";
+  highScore = localStorage.getItem("currentScore");
 }
 
 let x = 0;
@@ -36,9 +39,23 @@ function draw() {
     }
   }
   showScore(); // постоянный вывод счетчика рекорда
+  if (highScore === null) {
+    highScore = 0;
+  } // смена null на 0 при первом запуске игры
+  showHighScore(); // постоянный вывод высшего рекорда текущей сессии
   if (!gameInProgress) {
     // вывод уведомления при завершении игры
     showGameOver();
+
+    if (highScore === null) {
+      // установка в localStorage значения высшего рекорда при game over
+      localStorage.setItem("currentScore", 0);
+    } else if (score < highScore) {
+      localStorage.setItem("currentScore", highScore);
+    } else if (score > highScore) {
+      localStorage.setItem("currentScore", score);
+      showRecordGrats(); // вызов функции отрисовки поздравления при установке нового высшего рекорда
+    }
   }
 }
 
@@ -135,6 +152,14 @@ function showScore() {
   text(`Score: ${score}`, 10, 480);
 }
 
+// Функция вывода на экран сообщения о максимальном показателе рекорда (пройденных препятствий)
+function showHighScore() {
+  stroke(100, 100, 100);
+  strokeWeight(1);
+  fill(236, 237, 231);
+  text(`Highscore: ${highScore}`, 10, 30);
+}
+
 // Функция вывода на экран сообщения об окончании игры
 function showGameOver() {
   stroke(234, 96, 34);
@@ -143,4 +168,16 @@ function showGameOver() {
   text(`Game Over!`, canvasWidth / 2 - 50, canvasHeight / 2 - 30);
   text(`Press R to restart`, canvasWidth / 2 - 70, canvasHeight / 2);
   text(`Your Score:  ${score}`, canvasWidth / 2 - 55, canvasHeight / 2 + 30);
+}
+
+function showRecordGrats() {
+  stroke(156, 29, 43);
+  strokeWeight(1);
+  fill(236, 237, 231);
+  text(`Congratulations!`, canvasWidth / 2 - 71, canvasHeight / 2 - 90);
+  text(
+    `You've set a new record!`,
+    canvasWidth / 2 - 100,
+    canvasHeight / 2 + 90
+  );
 }
