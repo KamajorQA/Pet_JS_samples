@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <title>Getting Form data</title>
+    <style>
+        body{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            display:flex;
+            flex-direction: column;
+            width: 30vh;
+        }
+    </style>
+</head>
+<body>
+    <form class="user-data" id="user-form">
+        <div class="form__image"></div>
+        <input type="number" class="form__input" name="id"
+        min="1" required placeholder="id">
+        <input type="number" class="form__input" name="age"
+        placeholder="Возраст">
+        <input type="text" class="form__input" name="name"
+        required placeholder="Имя">
+        <input type="number" class="form__input" name="rate"
+        placeholder="Рейтинг (0-10)" min="0" max="10">
+        <textarea name="description" class="form__input form__textarea"
+        placeholder="Описание"></textarea>
+        <label class="form__checkbox-wrap">
+          <input type="checkbox" name="favorite" class="form__checkbox"
+          placeholder="">
+          <span class="form__label">Sovereign</span>
+          <span class="form__fake-checkbox">
+            <i class="fa-regular fa-circle-check"></i>
+          </span>
+        </label>
+        <input type="url" class="form__input form__input_image"
+        name="img_link" placeholder="Ссылка на изображение">
+        <button type="submit" class="form__btn btn">
+          Добавить дракона
+        </button>
+    </form>
+    <!-- <script src="./v.1.js"></script> -->
+    <script src="./v.2.js"></script>
+    <!-- <script src="./v.3.js"></script> -->
+    <!-- <script src="./v.4.js"></script> -->
+    <!-- <script src="./v.5.js"></script> -->
+    <!-- <script src="./v.6.js"></script> -->
+</body>
+</html>
